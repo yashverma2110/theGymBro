@@ -1,0 +1,6 @@
+const AUTH_ACTIONS_TYPES = {
+  LOGIN: "LOGIN",
+  SIGN_UP: "SIGNUP",
+};
+
+export default AUTH_ACTIONS_TYPES;

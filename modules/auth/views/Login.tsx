@@ -1,21 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import {
+  View,
+  StyleSheet,
+  NativeSyntheticEvent,
+  TextInputChangeEventData,
+} from "react-native";
 import LottieView from "lottie-react-native";
 import { Input, Button } from "react-native-elements";
 import { COLORS } from "../../../utils/Constants";
+import { useDispatch, useSelector } from "react-redux";
+import * as AUTH_ACTIONS from "../auth-actions";
 
 const Login = (props: any) => {
+  const dispatch = useDispatch();
+  const authState = useSelector((state: any) => state.auth);
   const animation = useRef<LottieView | null>(null);
-  const [formState, setFormState] = useState({});
+  const [formState, setFormState] = useState<any>({});
 
   useEffect(() => {
     animation.current?.play();
   }, []);
 
+  useEffect(() => {
+    if (!authState.loading && authState.user) {
+      props.navigation.navigate("Feed");
+    }
+  }, [authState.loading, authState.user]);
+
+  const handleInputChange = (name: string, value: string) => {
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   const handleLogin = () => {
     console.log(formState);
-
-    props.navigation.navigate("Feed");
+    dispatch(AUTH_ACTIONS.login(formState));
   };
 
   return (
@@ -40,6 +61,7 @@ const Login = (props: any) => {
           type: "font-awesome",
           name: "envelope-open",
         }}
+        onChangeText={(text) => handleInputChange("email", text)}
       />
       <Input
         label="Password"
@@ -48,6 +70,7 @@ const Login = (props: any) => {
           type: "font-awesome",
           name: "key",
         }}
+        onChangeText={(text) => handleInputChange("password", text)}
       />
       <Button
         type="clear"
@@ -55,7 +78,11 @@ const Login = (props: any) => {
         titleStyle={{ fontSize: 16 }}
         onPress={() => props.navigation.navigate("Signup")}
       />
-      <Button title="Get started" onPress={handleLogin} />
+      <Button
+        title="Get started"
+        loading={authState.loading}
+        onPress={handleLogin}
+      />
     </View>
   );
 };
