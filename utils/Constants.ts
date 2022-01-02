@@ -7,4 +7,5 @@ export const COLORS = {
     main: "#FF9F00",
     contrast: "#FFF",
   },
+  Placeholder: "#A9ADCC",
 };

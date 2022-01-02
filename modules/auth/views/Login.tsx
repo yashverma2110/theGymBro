@@ -14,6 +14,8 @@ const Login = (props: any) => {
 
   const handleLogin = () => {
     console.log(formState);
+
+    props.navigation.navigate("Feed");
   };
 
   return (
@@ -51,8 +53,9 @@ const Login = (props: any) => {
         type="clear"
         title="Don't have an account?"
         titleStyle={{ fontSize: 16 }}
+        onPress={() => props.navigation.navigate("Signup")}
       />
-      <Button title="Get started" />
+      <Button title="Get started" onPress={handleLogin} />
     </View>
   );
 };

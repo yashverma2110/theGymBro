@@ -20,7 +20,7 @@ const theme: Theme = {
     },
   },
   Input: {
-    placeholderTextColor: COLORS.Primary.main,
+    placeholderTextColor: COLORS.Placeholder,
     labelStyle: {
       color: COLORS.Primary.main,
       fontSize: 18,
