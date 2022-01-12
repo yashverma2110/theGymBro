@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  View,
-  StyleSheet,
-  NativeSyntheticEvent,
-  TextInputChangeEventData,
-} from "react-native";
+import { View, StyleSheet } from "react-native";
 import LottieView from "lottie-react-native";
-import { Input, Button } from "react-native-elements";
-import { COLORS } from "../../../utils/Constants";
+import { Button } from "react-native-elements";
+import { COLORS } from "../../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import * as AUTH_ACTIONS from "../auth-actions";
+import FormStateInput from "../../../components/FormStateInput";
+import { getToken, setToken } from "../../../utils/methods";
 
 const Login = (props: any) => {
   const dispatch = useDispatch();
@@ -18,24 +15,25 @@ const Login = (props: any) => {
   const [formState, setFormState] = useState<any>({});
 
   useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        props.navigation.navigate("Home");
+      }
+    });
+
     animation.current?.play();
   }, []);
 
   useEffect(() => {
     if (!authState.loading && authState.user) {
-      props.navigation.navigate("Feed");
+      setToken(authState.user.token).then(() => {
+        props.navigation.navigate("Home");
+      });
+      props.navigation.navigate("Home");
     }
   }, [authState.loading, authState.user]);
 
-  const handleInputChange = (name: string, value: string) => {
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
-
   const handleLogin = () => {
-    console.log(formState);
     dispatch(AUTH_ACTIONS.login(formState));
   };
 
@@ -54,23 +52,25 @@ const Login = (props: any) => {
           source={require("../../../assets/animations/gym-animation.json")}
         />
       </View>
-      <Input
+      <FormStateInput
         label="Email address"
+        name="email"
         placeholder="example@gmail.com"
         leftIcon={{
           type: "font-awesome",
           name: "envelope-open",
         }}
-        onChangeText={(text) => handleInputChange("email", text)}
+        setFormState={setFormState}
       />
-      <Input
+      <FormStateInput
         label="Password"
+        name="password"
         placeholder="FitAf#1"
         leftIcon={{
           type: "font-awesome",
           name: "key",
         }}
-        onChangeText={(text) => handleInputChange("password", text)}
+        setFormState={setFormState}
       />
       <Button
         type="clear"

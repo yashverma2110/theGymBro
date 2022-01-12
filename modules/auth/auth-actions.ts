@@ -1,4 +1,4 @@
-import apiService from "../../utils/ApiService";
+import apiService from "../../utils/apiService";
 import AUTH_ACTIONS_TYPES from "./auth-actionTypes";
 
 interface loginPaylod {
@@ -18,7 +18,7 @@ interface signupPayload {
   email: string;
   password: string;
 }
-const signUp = async (payload: signupPayload) => {
+const signUp = (payload: signupPayload) => {
   return {
     type: AUTH_ACTIONS_TYPES.SIGN_UP,
     payload: apiService.post("/user/signup", payload),

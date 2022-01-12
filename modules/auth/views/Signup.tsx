@@ -1,19 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Input, Button } from "react-native-elements";
-import { COLORS } from "../../../utils/Constants";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "react-native-elements";
 import LottieView from "lottie-react-native";
+import { COLORS } from "../../../utils/constants";
+import FormStateInput from "../../../components/FormStateInput";
+import * as AUTH_ACTIONS from "../auth-actions";
+import { getToken, setToken } from "../../../utils/methods";
 
 const Login = (props: any) => {
+  const dispatch = useDispatch();
   const animation = useRef<LottieView | null>(null);
-  const [formState, setFormState] = useState({});
+  const authState = useSelector((state: any) => state.auth);
+  const [formState, setFormState] = useState<any>({});
 
   useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        props.navigation.navigate("Home");
+      }
+    });
+
     animation.current?.play();
   }, []);
 
-  const handleLogin = () => {
-    console.log(formState);
+  useEffect(() => {
+    if (!authState.loading && authState.user) {
+      setToken(authState.user.token).then(() => {
+        props.navigation.navigate("Home");
+      });
+    }
+  }, [authState.loading, authState.user]);
+
+  const handleSignup = () => {
+    dispatch(AUTH_ACTIONS.signUp(formState));
   };
 
   return (
@@ -34,42 +54,50 @@ const Login = (props: any) => {
       </View>
       <View style={styles.nameInputContainer}>
         <View style={styles.nameInput}>
-          <Input
+          <FormStateInput
             label="First Name"
+            name="firstName"
             placeholder="Dwayne"
             leftIcon={{
               type: "font-awesome",
               name: "envelope-open",
             }}
+            setFormState={setFormState}
           />
         </View>
         <View style={styles.nameInput}>
-          <Input
+          <FormStateInput
             style={styles.nameInput}
+            name="lastName"
             label="Last Name"
             placeholder="Jhonson"
             leftIcon={{
               type: "font-awesome",
               name: "envelope-open",
             }}
+            setFormState={setFormState}
           />
         </View>
       </View>
-      <Input
+      <FormStateInput
         label="Email address"
+        name="email"
         placeholder="example@gmail.com"
         leftIcon={{
           type: "font-awesome",
           name: "envelope-open",
         }}
+        setFormState={setFormState}
       />
-      <Input
+      <FormStateInput
         label="Password"
+        name="password"
         placeholder="FitAf#1"
         leftIcon={{
           type: "font-awesome",
           name: "key",
         }}
+        setFormState={setFormState}
       />
       <Button
         title="Already part of the fam?"
@@ -77,7 +105,7 @@ const Login = (props: any) => {
         titleStyle={{ fontSize: 16 }}
         onPress={() => props.navigation.navigate("Login")}
       />
-      <Button title="Let's goo" />
+      <Button title="Let's goo" onPress={handleSignup} />
     </View>
   );
 };
