@@ -1,5 +1,5 @@
 import { Theme } from "react-native-elements";
-import { COLORS } from "./Constants";
+import { COLORS } from "./constants";
 
 const theme: Theme = {
   colors: {
