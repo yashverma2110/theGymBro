@@ -7,11 +7,15 @@ interface FormStateInputProps {
   name: string;
   label: string;
   leftIcon: any;
+  isInvalid?: boolean;
+  errorMessage?: string;
 }
 
 const FormStateInput = ({
   name,
   setFormState,
+  isInvalid = false,
+  errorMessage = "",
   ...props
 }: FormStateInputProps & TextInputProps) => {
   const handleInputChange = (name: string, value: string) => {
@@ -22,7 +26,11 @@ const FormStateInput = ({
   };
 
   return (
-    <Input {...props} onChangeText={(text) => handleInputChange(name, text)} />
+    <Input
+      {...props}
+      errorMessage={isInvalid ? errorMessage : ""}
+      onChangeText={(text) => handleInputChange(name, text)}
+    />
   );
 };
 

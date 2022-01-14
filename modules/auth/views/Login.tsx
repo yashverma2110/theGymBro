@@ -54,6 +54,7 @@ const Login = (props: any) => {
       </View>
       <FormStateInput
         label="Email address"
+        textContentType="emailAddress"
         name="email"
         placeholder="example@gmail.com"
         leftIcon={{
@@ -65,6 +66,7 @@ const Login = (props: any) => {
       <FormStateInput
         label="Password"
         name="password"
+        textContentType="password"
         placeholder="FitAf#1"
         leftIcon={{
           type: "font-awesome",

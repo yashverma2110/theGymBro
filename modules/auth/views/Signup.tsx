@@ -6,7 +6,7 @@ import LottieView from "lottie-react-native";
 import { COLORS } from "../../../utils/constants";
 import FormStateInput from "../../../components/FormStateInput";
 import * as AUTH_ACTIONS from "../auth-actions";
-import { getToken, setToken } from "../../../utils/methods";
+import { getToken, setToken, validateEmail } from "../../../utils/methods";
 
 const Login = (props: any) => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Login = (props: any) => {
     }
   }, [authState.loading, authState.user]);
 
-  const handleSignup = () => {
+  const handleSignup = async () => {
     dispatch(AUTH_ACTIONS.signUp(formState));
   };
 
@@ -82,6 +82,7 @@ const Login = (props: any) => {
       <FormStateInput
         label="Email address"
         name="email"
+        textContentType="emailAddress"
         placeholder="example@gmail.com"
         leftIcon={{
           type: "font-awesome",
@@ -92,6 +93,7 @@ const Login = (props: any) => {
       <FormStateInput
         label="Password"
         name="password"
+        textContentType="password"
         placeholder="FitAf#1"
         leftIcon={{
           type: "font-awesome",
