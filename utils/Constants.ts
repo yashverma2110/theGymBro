@@ -8,6 +8,7 @@ export const COLORS = {
     contrast: "#FFF",
   },
   Placeholder: "#A9ADCC",
+  Shadow: "#000",
 };
 
 export const BASE_URL = "http://192.168.0.102:8080";

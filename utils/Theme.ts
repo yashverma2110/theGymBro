@@ -18,6 +18,13 @@ const theme: Theme = {
     containerStyle: {
       borderRadius: 20,
     },
+    icon: {
+      color: COLORS.Primary.contrast,
+      size: 16,
+    },
+    iconContainerStyle: {
+      marginLeft: 10,
+    },
   },
   Input: {
     placeholderTextColor: COLORS.Placeholder,
