@@ -8,8 +8,7 @@ const theme: Theme = {
   Button: {
     raised: true,
     titleStyle: {
-      fontWeight: "bold",
-      fontSize: 20,
+      fontSize: 14,
     },
     buttonStyle: {
       borderRadius: 20,
@@ -17,10 +16,12 @@ const theme: Theme = {
     },
     containerStyle: {
       borderRadius: 20,
+      height: 42,
     },
     icon: {
       color: COLORS.Primary.contrast,
       size: 16,
+      type: "font-awesome",
     },
     iconContainerStyle: {
       marginLeft: 10,
@@ -39,6 +40,19 @@ const theme: Theme = {
     leftIcon: {
       color: COLORS.Primary.main,
       size: 16,
+    },
+  },
+  Card: {
+    containerStyle: {
+      shadowColor: COLORS.Shadow,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.4,
+      shadowRadius: 6,
+      elevation: 6,
+      borderRadius: 12,
     },
   },
 };

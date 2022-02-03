@@ -5,12 +5,31 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 import Login from "../modules/auth/views/Login";
 import Signup from "../modules/auth/views/Signup";
-import Feed from "../modules/home/views/Feed";
+import Feed from "../modules/feed/views";
 import { COLORS } from "../utils/constants";
 import { Text, View } from "react-native";
+import Workout from "../modules/workout/views";
 
 const HomeNavigator = createBottomTabNavigator(
   {
+    Workout: {
+      screen: Workout,
+      navigationOptions: {
+        tabBarLabel: (
+          <View style={{ alignItems: "center" }}>
+            <Text style={{ color: COLORS.Primary.main }}>Workout</Text>
+          </View>
+        ),
+        tabBarIcon: ({ focused }) => (
+          <FA
+            name="dumbbell"
+            size={18}
+            color={COLORS.Primary.main}
+            solid={focused}
+          />
+        ),
+      },
+    },
     Feed: {
       screen: Feed,
       navigationOptions: {

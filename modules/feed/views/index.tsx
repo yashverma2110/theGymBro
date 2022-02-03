@@ -21,10 +21,10 @@ const Feed = () => {
           source={require("../../../assets/animations/bubble-levitate.json")}
         />
       </View>
-      <Card containerStyle={styles.emptyCard}>
+      <Card>
         <Card.Title h4>WALL OF GLORY</Card.Title>
         <Card.Divider />
-        <Text style={{ fontSize: 16 }}>
+        <Text style={{ fontSize: 16, textAlign: "center", fontWeight: "700" }}>
           You and your gym buddy's activities will appear here. Show your
           appreciation, track activities, maintain streaks, compete and stay
           accountable.
@@ -32,7 +32,6 @@ const Feed = () => {
         <View style={{ alignItems: "center" }}>
           <Button
             title="Add or Invite a friend"
-            titleStyle={{ fontSize: 16 }}
             containerStyle={styles.inviteButton}
             onPress={() => setIsAddFriendModalShowing(true)}
           />
@@ -64,17 +63,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#FFF",
     justifyContent: "center",
-  },
-  emptyCard: {
-    shadowColor: COLORS.Shadow,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.35,
-    shadowRadius: 8,
-    elevation: 5,
-    borderRadius: 8,
   },
   animationContainer: {
     height: 120,
