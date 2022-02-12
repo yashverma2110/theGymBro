@@ -25,4 +25,11 @@ const signUp = (payload: signupPayload) => {
   };
 };
 
-export { login, signUp };
+const setTokenInStore = (token: string) => {
+  return {
+    type: AUTH_ACTIONS_TYPES.SET_TOKEN,
+    payload: token,
+  };
+};
+
+export { login, signUp, setTokenInStore };

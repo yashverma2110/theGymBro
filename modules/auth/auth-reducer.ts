@@ -3,6 +3,7 @@ import AUTH_ACTIONS_TYPES from "./auth-actionTypes";
 const initialState = {
   loading: false,
   user: null,
+  token: null,
 };
 
 const authReducer = (state = initialState, action: any) => {
@@ -38,6 +39,11 @@ const authReducer = (state = initialState, action: any) => {
       return {
         ...state,
         loading: false,
+      };
+    case AUTH_ACTIONS_TYPES.SET_TOKEN:
+      return {
+        ...state,
+        token: action.payload,
       };
     default:
       return state;

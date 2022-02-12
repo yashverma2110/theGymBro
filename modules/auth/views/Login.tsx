@@ -17,6 +17,7 @@ const Login = (props: any) => {
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
+        dispatch(AUTH_ACTIONS.setTokenInStore(token));
         props.navigation.navigate("Home");
       }
     });

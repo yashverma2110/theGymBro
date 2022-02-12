@@ -6,7 +6,7 @@ import LottieView from "lottie-react-native";
 import { COLORS } from "../../../utils/constants";
 import FormStateInput from "../../../components/FormStateInput";
 import * as AUTH_ACTIONS from "../auth-actions";
-import { getToken, setToken, validateEmail } from "../../../utils/methods";
+import { getToken, setToken } from "../../../utils/methods";
 
 const Login = (props: any) => {
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ const Login = (props: any) => {
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
+        dispatch(AUTH_ACTIONS.setTokenInStore(token));
         props.navigation.navigate("Home");
       }
     });

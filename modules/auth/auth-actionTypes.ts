@@ -1,6 +1,7 @@
 const AUTH_ACTIONS_TYPES = {
   LOGIN: "LOGIN",
   SIGN_UP: "SIGNUP",
+  SET_TOKEN: "SET_TOKEN",
 };
 
 export default AUTH_ACTIONS_TYPES;
