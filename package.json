@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "EXPO_DEBUG=false expo start --dev",
+    "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -13,13 +13,15 @@
     "axios": "^0.24.0",
     "expo": "~43.0.2",
     "expo-app-loading": "^1.3.0",
-    "expo-secure-store": "^11.1.0",
+    "expo-secure-store": "~11.0.3",
     "expo-status-bar": "~1.1.0",
+    "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "lottie-react-native": "4.0.3",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-element-dropdown": "^1.6.1",
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-reanimated": "~2.2.0",
@@ -34,7 +36,8 @@
     "redux": "^4.1.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-promise-middleware": "^6.1.2",
-    "remote-redux-devtools": "^0.5.16"
+    "remote-redux-devtools": "^0.5.16",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

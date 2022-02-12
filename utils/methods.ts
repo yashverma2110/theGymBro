@@ -9,3 +9,17 @@ export const getToken = async () => {
 
   return token;
 };
+
+export const getOptionsFromEnum = (
+  enumObject: any
+): { label: string; value: string }[] => {
+  const list = [];
+  for (const key in enumObject) {
+    list.push({
+      label: key,
+      value: enumObject[key],
+    });
+  }
+
+  return list;
+};

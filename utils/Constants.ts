@@ -15,4 +15,4 @@ export const COLORS = {
 
 export const STANDARD_BUTTON_HEIGHT = 70;
 
-export const BASE_URL = "http://192.168.0.101:8080"; // ! use command ifconfig | grep 'inet ' for IP info
+export const BASE_URL = "http://192.168.0.102:8080"; // ! use command ifconfig | grep 'inet ' for IP info

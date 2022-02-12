@@ -5,9 +5,11 @@ import { composeWithDevTools } from "remote-redux-devtools";
 
 // reducers
 import authReducer from "./modules/auth/auth-reducer";
+import workoutReducer from "./modules/workout/workout-reducer";
 
 const reducer = combineReducers({
   auth: authReducer,
+  workout: workoutReducer,
 });
 
 const store = createStore(

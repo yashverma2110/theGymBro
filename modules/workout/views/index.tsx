@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { View, StyleSheet } from "react-native";
 import { Button, Card, Text } from "react-native-elements";
 import LottieView from "lottie-react-native";
 import { COLORS } from "../../../utils/constants";
-import { Chip } from "react-native-elements/dist/buttons/Chip";
+import CreateExerciseModal from "./CreateExcerciseModal";
+import { getAllExercises } from "../workout-actions";
 
-const Workout = () => {
+const Workout = (props: any) => {
+  const dispatch = useDispatch();
+  const { token } = useSelector((state: any) => state.auth);
+  const [isCreateExerciseModalShowing, setIsCreateExerciseModalShowing] =
+    useState(false);
+
+  useEffect(() => {
+    dispatch(getAllExercises(token));
+  }, []);
+
   return (
     <View style={styles.container}>
       <Card>
@@ -15,14 +26,23 @@ const Workout = () => {
           Now let's get started:
         </Text>
         <View style={{ alignItems: "center" }}>
-          <Button title="Start a workout" containerStyle={styles.buttons} />
+          <Button
+            title="Start a workout"
+            containerStyle={styles.buttons}
+            icon={{
+              name: "play",
+            }}
+          />
           <Button
             title="Create a workout"
             containerStyle={styles.buttons}
-            buttonStyle={{ backgroundColor: COLORS.Success }}
+            buttonStyle={{
+              backgroundColor: COLORS.Success,
+            }}
             icon={{
               name: "plus",
             }}
+            onPress={() => setIsCreateExerciseModalShowing(true)}
           />
         </View>
       </Card>
@@ -37,7 +57,10 @@ const Workout = () => {
         <View style={styles.stampContainer}>
           {["It", "Takes", "Work"].map((text, index) => {
             return (
-              <Text style={{ fontSize: 14 * (index + 1), fontWeight: "bold" }}>
+              <Text
+                key={text}
+                style={{ fontSize: 14 * (index + 1), fontWeight: "bold" }}
+              >
                 {text}
               </Text>
             );
@@ -55,6 +78,10 @@ const Workout = () => {
           />
         </View>
       </View>
+      <CreateExerciseModal
+        isShowing={isCreateExerciseModalShowing}
+        setIsShowing={setIsCreateExerciseModalShowing}
+      />
     </View>
   );
 };
